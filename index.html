@@ -4,289 +4,493 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO Meta Tags -->
-  <title>Koushitha | AI & ML Portfolio</title>
+  <title>Koushitha | Responsive Portfolio</title>
+
   <meta
     name="description"
-    content="Accessible HTML5 semantic portfolio website showcasing projects, skills, achievements, and contact information."
+    content="Responsive portfolio website using advanced CSS3, Flexbox, CSS Grid, dark mode, and semantic HTML5."
   />
-  <meta
-    name="keywords"
-    content="Portfolio, HTML5, Accessibility, AI, Machine Learning, Web Development"
-  />
-  <meta name="author" content="Koushitha" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph Tags -->
-  <meta property="og:title" content="Koushitha Portfolio" />
-  <meta
-    property="og:description"
-    content="Accessible and semantic portfolio website built using HTML5 standards."
-  />
-  <meta property="og:type" content="website" />
 
   <style>
+    /* =========================
+       CSS VARIABLES
+    ========================== */
+
+    :root {
+      --bg-color: #f5f7fa;
+      --text-color: #1e293b;
+      --card-color: #ffffff;
+      --primary-color: #2563eb;
+      --secondary-color: #0f172a;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    body.dark-mode {
+      --bg-color: #0f172a;
+      --text-color: #f8fafc;
+      --card-color: #1e293b;
+      --primary-color: #60a5fa;
+      --secondary-color: #f8fafc;
+      --shadow: 0 4px 12px rgba(255,255,255,0.08);
+    }
+
+    /* =========================
+       GLOBAL STYLES
+    ========================== */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
       line-height: 1.6;
-      background-color: #f4f4f4;
-      color: #222;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 10px;
-      background: #000;
-      color: #fff;
-      padding: 10px;
-      z-index: 100;
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
       text-decoration: none;
+      color: inherit;
     }
 
-    .skip-link:focus {
-      top: 10px;
+    ul {
+      list-style: none;
     }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
 
     header {
-      background: #222;
-      color: #fff;
-      padding: 20px;
+      background: var(--card-color);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
     }
 
     nav ul {
       display: flex;
-      list-style: none;
-      gap: 20px;
-      margin-top: 10px;
-      flex-wrap: wrap;
+      gap: 1.5rem;
     }
 
     nav a {
-      color: #fff;
-      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+    }
+
+    .theme-btn {
+      padding: 0.6rem 1rem;
+      border: none;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================== */
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      color: var(--secondary-color);
+    }
+
+    .hero-text span {
+      color: var(--primary-color);
+    }
+
+    .hero-text p {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary-color);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      margin-top: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* =========================
+       ABOUT SECTION
+    ========================== */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-color);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* =========================
+       SKILLS SECTION
+    ========================== */
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-box {
+      background: var(--card-color);
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
       font-weight: bold;
     }
 
-    nav a:focus,
-    nav a:hover,
-    button:focus,
-    input:focus,
-    textarea:focus {
-      outline: 3px solid #0078d7;
-      outline-offset: 2px;
-    }
+    /* =========================
+       PROJECTS SECTION
+    ========================== */
 
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    section {
-      background: #fff;
-      margin-bottom: 20px;
-      padding: 20px;
-      border-radius: 8px;
-    }
-
-    h1, h2, h3 {
-      margin-bottom: 15px;
-    }
-
-    .projects {
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
 
-    article {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 15px;
-      background: #fafafa;
+    .project-card {
+      background: var(--card-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
     }
+
+    .project-card:hover {
+      transform: scale(1.03);
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    /* =========================
+       CONTACT SECTION
+    ========================== */
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 15px;
-    }
-
-    label {
-      font-weight: bold;
+      gap: 1rem;
+      background: var(--card-color);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
     }
 
     input,
     textarea {
-      padding: 10px;
-      border: 1px solid #999;
+      padding: 1rem;
+      border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 1rem;
     }
 
-    button {
-      background: #222;
-      color: #fff;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
+    input:focus,
+    textarea:focus {
+      outline: 2px solid var(--primary-color);
     }
+
+    /* =========================
+       FOOTER
+    ========================== */
 
     footer {
-      background: #222;
-      color: #fff;
       text-align: center;
-      padding: 20px;
+      padding: 2rem;
+      background: var(--card-color);
+      margin-top: 2rem;
     }
 
-    @media (max-width: 600px) {
+    /* =========================
+       TABLET RESPONSIVE
+    ========================== */
+
+    @media (min-width: 768px) {
+      .hero-content {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: left;
+      }
+
+      .about-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* =========================
+       MOBILE RESPONSIVE
+    ========================== */
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
       nav ul {
         flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text h1 {
+        font-size: 2.2rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Skip Navigation Link -->
-  <a href="#main-content" class="skip-link">Skip to Main Content</a>
+  <!-- HEADER -->
 
-  <!-- Header -->
-  <header role="banner">
-    <h1>Koushitha Portfolio</h1>
-    <p>AI & Machine Learning Student | Web Developer</p>
+  <header>
+    <div class="container navbar">
+      <div class="logo">Koushitha</div>
 
-    <!-- Navigation -->
-    <nav aria-label="Main Navigation" role="navigation">
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-btn" onclick="toggleTheme()">
+        Toggle Theme
+      </button>
+    </div>
   </header>
 
-  <!-- Main Content -->
-  <main id="main-content" role="main">
+  <!-- HERO SECTION -->
 
-    <!-- About Section -->
-    <section id="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">About Me</h2>
-      <p>
-        I am an AI & ML student passionate about building accessible,
-        user-friendly, and responsive web applications using modern web
-        technologies.
-      </p>
-    </section>
+  <section class="hero" id="home">
+    <div class="container hero-content">
 
-    <!-- Skills Section -->
-    <section id="skills" aria-labelledby="skills-heading">
-      <h2 id="skills-heading">Skills</h2>
-      <ul>
-        <li>HTML5 & Semantic Web</li>
-        <li>CSS3 & Responsive Design</li>
-        <li>JavaScript</li>
-        <li>Python & Machine Learning</li>
-        <li>Accessibility (WCAG)</li>
-      </ul>
-    </section>
+      <div class="hero-text">
+        <h1>Hello, I'm <span>Koushitha</span></h1>
+        <p>
+          AI & Machine Learning Student passionate about responsive
+          web development and accessible UI design.
+        </p>
 
-    <!-- Projects Section -->
-    <section id="projects" aria-labelledby="projects-heading">
-      <h2 id="projects-heading">Projects</h2>
+        <a href="#projects" class="btn">View Projects</a>
+      </div>
 
-      <div class="projects">
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1000&auto=format&fit=crop"
+          alt="Portfolio Banner"
+        />
+      </div>
 
-        <article aria-labelledby="project1-title">
-          <h3 id="project1-title">Fake News Detection System</h3>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+
+      <div class="about-grid">
+
+        <div class="card">
+          <h3>Who I Am</h3>
           <p>
-            AI-powered web application that detects fake news articles using
-            machine learning models.
+            I am a passionate developer focused on AI, machine learning,
+            and modern responsive web technologies.
           </p>
-        </article>
+        </div>
 
-        <article aria-labelledby="project2-title">
-          <h3 id="project2-title">Disaster Preparedness System</h3>
+        <div class="card">
+          <h3>My Goal</h3>
           <p>
-            A responsive emergency management platform designed for disaster
-            awareness and preparedness.
+            To build high-quality accessible digital experiences using
+            semantic HTML5, CSS3, and responsive architectures.
           </p>
-        </article>
-
-        <article aria-labelledby="project3-title">
-          <h3 id="project3-title">Portfolio Website</h3>
-          <p>
-            Fully accessible semantic portfolio website following WCAG and
-            Lighthouse best practices.
-          </p>
-        </article>
+        </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact Me</h2>
+  <!-- SKILLS -->
 
-      <form aria-label="Contact Form">
+  <section id="skills">
+    <div class="container">
+      <h2>Skills</h2>
 
-        <div>
-          <label for="name">Full Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            aria-required="true"
-            autocomplete="name"
-          />
+      <div class="skills-grid">
+        <div class="skill-box">HTML5</div>
+        <div class="skill-box">CSS3</div>
+        <div class="skill-box">JavaScript</div>
+        <div class="skill-box">Flexbox</div>
+        <div class="skill-box">CSS Grid</div>
+        <div class="skill-box">Responsive Design</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-content">
+            <h3>Fake News Detection</h3>
+            <p>
+              Machine learning application that detects fake news using
+              NLP algorithms.
+            </p>
+          </div>
         </div>
 
-        <div>
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            aria-required="true"
-            autocomplete="email"
-          />
+        <div class="project-card">
+          <div class="project-content">
+            <h3>Disaster Preparedness</h3>
+            <p>
+              Responsive emergency preparedness web platform with modern UI.
+            </p>
+          </div>
         </div>
 
-        <div>
-          <label for="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="6"
-            required
-            aria-required="true"
-          ></textarea>
+        <div class="project-card">
+          <div class="project-content">
+            <h3>Portfolio Website</h3>
+            <p>
+              Advanced responsive portfolio using Grid, Flexbox, and dark mode.
+            </p>
+          </div>
         </div>
 
-        <button type="submit" aria-label="Submit Contact Form">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+
+      <form>
+        <input type="text" placeholder="Enter Your Name" required />
+
+        <input type="email" placeholder="Enter Your Email" required />
+
+        <textarea rows="6" placeholder="Your Message"></textarea>
+
+        <button type="submit" class="theme-btn">
           Send Message
         </button>
       </form>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <!-- FOOTER -->
 
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <p>&copy; 2026 Koushitha. All Rights Reserved.</p>
+  <footer>
+    <p>© 2026 Koushitha | Responsive Portfolio Website</p>
   </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
 
 </body>
 </html>
